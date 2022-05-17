@@ -1,76 +1,62 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //Estrutura Push!!!
 
-struct Data{
-	int dia, mes, ano;
-};
-
 struct Pessoa{
 	char nome[50];
-	struct Data data;
+	int idade;
 };
 
 struct No{
 	struct Pessoa p;
-	struct No *proximo;
+	struct No *anterior;
 };
 
-	
+struct Pessoa ler_pessoa();
+void imprimir_pessoa(struct Pessoa p);
+
+struct No * push(struct No *topo);
+
+
+
 int main(){
-	// Declaração das funções:
-	struct Pessoa ler_pessoa();
-	void imprimir_pessoa(struct Pessoa p);
-	
-	// Declaração das variáveis:
+		
 	struct No *topo = NULL;
-	struct Pessoa pessoa;
-	int opcao;
+
+	topo = push(topo);
 	
-	// Script:	
 	
-	do{
-		printf("--------------------\n");
-		printf("0 - Sair");
-		printf("\n1 - Empilhar");
-		printf("\n2 - Desempilhar");
-		printf("\n3 - Imprimir");
-		printf("\n--------------------\n");
-		scanf("%d", &opcao); fflush(stdin);
-		
-		switch(opcao){
-		
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 0:
-				break;
-				
-		}
-		
-	}while(opcao != 0);
 	
 	return 0;
 }
 
-struct Pessoa ler_pessoa(){
-	struct Pessoa p;
-	printf("Digite o nome da nova pessoa: ");
-	fgets(p.nome, 50, stdin); fflush(stdin);
-	printf("Digite a data de nascimento: [dd mm aa]: ");
-	scanf("%d%d%d", &p.data.dia, &p.data.mes, &p.data.ano); fflush(stdin);
-	return  p;
-}
-
 void imprimir_pessoa(struct Pessoa p){
 	printf("\tNome: %s", p.nome);
-	printf("\tData de nascimento: %d/%2d/%d", p.data.dia, p.data.mes, p.data.ano);
+	printf("\tIdade: %d\n", p.idade);
 }
 
-// FUNÇÃO PARA A OPERAÇÃO PUSH (empilhar):
+struct Pessoa ler_pessoa(){
+	struct Pessoa p;
+	printf("Digite o nome da pessoa:\n");
+	fgets(p.nome, 50, stdin); fflush(stdin);
+	printf("\nDigite a idade do(a) %s",p.nome);
+	scanf("%d", &p.idade);
+	return p;
+}
 
-// *** empilhar(No *topo)
+struct No * push(struct No *topo){
+	struct No *novo = NULL;
+	novo = (struct No *)malloc(sizeof(struct No));
+	if(novo){
+		novo->p = ler_pessoa();
+		novo->anterior = topo;
+		return novo;
+	}else{
+		printf("Erro ao alocar memoria");
+		return NULL;
+	}
+}
+
+
 
