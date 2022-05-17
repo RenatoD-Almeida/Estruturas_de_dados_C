@@ -1,1 +1,1 @@
-Minha experiencia na faculdade para com estruturas de dados
+Minha experiência na faculdade para com estruturas de dados~
