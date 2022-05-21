@@ -1,71 +1,87 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Data_nascimento{
-	int dia;
-	int mes;
-	int ano;
-};
-
 struct Pessoa{
 	char nome[50];
-	struct Data_nascimento data;
+	int idade;
+	float peso, altura;
 };
 
-struct NO{
-	struct Pessoa pessoa;
-	struct NO *anterior;
+struct Pilha_Estatica{
+	struct Pessoa clientes[10];
+	int topo_da_pilha;
 };
-
-struct Stack{
-	struct NO * topo_da_pilha;
-	int tamanho;
-};
-
-
-
-void cadastra_pessoa(struct Pessoa * p);
-void imprimir_pessoa(struct Pessoa p);
-void iniciar_stack(struct Stack * pilha);
-
 	
+void iniciar_pilha(struct Pilha_Estatica * p);
+void push(struct Pilha_Estatica * p);
+void imprimir_pilha(struct Pilha_Estatica p);
+void pop(struct Pilha_Estatica * p);
+
+struct Pessoa cadastrar_pessoa();
+void ler_pessoa(struct Pessoa p);
+
 int main(){
 	
-	struct Pessoa p1;
-	cadastra_pessoa(&p1);
-	imprimir_pessoa(p1);
+	struct Pilha_Estatica p1;
+	struct Pessoa removido;
+	iniciar_pilha(&p1);
+	push(&p1);
+	push(&p1);
+	imprimir_pilha(p1);
+	pop(&p1);
+	imprimir_pilha(p1);
+	pop(&p1);
+	
 	
 	return 0;
 }
 
-struct Pessoa cadastra_pessoa(){
+struct Pessoa cadastrar_pessoa(){
 	struct Pessoa p;
-	printf("\n------- CADASTRO -------\n");
-	printf("Nome: ");
-	fgets(p.nome, 50, stdin); fflush(stdin);
-	printf("\nData de nascimento: [dd mm aaaa]: ");
-	scanf("%d %d %d", &p.data.dia, &p.data.mes, &p.data.ano); fflush(stdin);
-	printf("\n----- FIM CADASTRO -----\n");
+	printf("---------- Cadastro ----------\n");
+	printf("Nome:\n");
+	scanf("%50[^\n]%*c", &p.nome);
+	printf("Idade:\n");
+	scanf("%d%*c", &p.idade);
+	printf("Peso:\n");
+	scanf("%f%*c", &p.peso);
+	printf("Altura:\n");
+	scanf("%f%*c", &p.altura);
+	return p;
+}
+
+void ler_pessoa(struct Pessoa p){
+	printf("\n\tNome: %s", p.nome);
+	printf("\tIdade: %d\n", p.idade);
+	printf("\tPeso: %.2f", p.peso);
+	printf("\tAltura: %.2f\n", p.altura);
+}
+
+void iniciar_pilha(struct Pilha_Estatica * p){
+	p->topo_da_pilha = 0;
+}
+
+void push(struct Pilha_Estatica * p){
+	p->clientes[p->topo_da_pilha] = cadastrar_pessoa();
+	++p->topo_da_pilha;
+}
+
+void pop(struct Pilha_Estatica * p){
+	if(p->topo_da_pilha){
+		--p->topo_da_pilha;
+	}else{
+		printf("\n\tPilha ja vazia.\n");
+	}
 	
 }
 
-void imprimir_pessoa(struct Pessoa p){
-	printf("\nNome: %s", p.nome);
-	printf("Data de nascimento: %d/%d/%d", p.data.dia, p.data.mes, p.data.ano);
-}
-
-void iniciar_stack(struct Stack * pilha){
-	pilha->topo_da_pilha = NULL;
-	pilha->tamanho = 0;
-}
-
-void push(struct Stack * pilha){
-	struct No *novo_NO;
-	novo_NO = (struct NO *)malloc(sizeof(struct NO));
-	if(novo_NO){
-		
-	}else{
-		
+void imprimir_pilha(struct Pilha_Estatica p){
+	int i = p.topo_da_pilha - 1;
+	printf("\t---------- Inicio Pilha ----------\n");
+	while(i >= 0){
+		ler_pessoa(p.clientes[i]);
+		i--;
 	}
+	printf("\t---------- Fim da Pilha ----------\n");
 }
 
