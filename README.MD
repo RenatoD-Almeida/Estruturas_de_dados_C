@@ -1,0 +1,1 @@
+• Minha experiência com estruturas de dados: Dinâmicas e Estáticas.
