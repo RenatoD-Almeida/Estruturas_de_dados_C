@@ -44,9 +44,11 @@ int menu(){
 
 int main(){
 	
+	
 	PD pilha_dinamica;
 	iniciar_pilha(&pilha_dinamica);
 	int op = 0;
+	
 	
 	while(op != 4){
 		op = menu();
