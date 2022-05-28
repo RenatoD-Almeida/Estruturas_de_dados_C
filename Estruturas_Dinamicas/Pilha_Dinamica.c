@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-	
+
+#define exit 4
+
 /* Simulação da utilização de uma pilha dinâmica em um sistema de cadastro de Pessoas (Nome, idade, peso e altura).*/
 
 struct Pessoa{
@@ -50,7 +52,7 @@ int main(){
 	int op = 0;
 	
 	
-	while(op != 4){
+	while(op != exit){
 		op = menu();
 		switch(op){
 			case 1:
