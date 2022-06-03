@@ -152,6 +152,7 @@ void imprimir_pessoa(struct Pessoa p){
 /* Função de menu, retorna um inteiro para o controle da saída do ciclo while no main
 -> essa função chama a função menu_faz para dar funcionalidade ao menu, fazendo com que assim não seja
 necessário a poluição de código no main */
+
 int menu(FD *fila){
 	char opcao = 0;
 	system("cls");
@@ -202,6 +203,7 @@ void continuar(){
 - O ponteiro desalocar apontará para o mesmo lugar que o auxiliar.
 - O auxiliar apontará para o proximo elemento (auxiliar->proximo)
 - Assim repetindo o ciclo. */
+
 void desalocar(FD *fila){
 	struct NO *desalocar, *auxiliar;
 	desalocar = auxiliar = fila->inicio_da_fila;

@@ -69,10 +69,6 @@ int main(){
 				break;
 		}
 	}
-	
-	
-
-	
 	return 0;
 }
 
@@ -139,6 +135,15 @@ void printS(PD pilha){
 	}
 }
 
+void desaloca_pilha(PD *pilha){
+	struct NO *auxiliar, *deletar;
+	auxiliar = deletar = pilha->topo_da_pilha;
+	while(auxiliar){
+		auxiliar = auxiliar->anterior;
+		free(deletar);
+		deletar = auxiliar;
+	}
+}
 
 
 
